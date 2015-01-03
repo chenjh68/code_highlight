@@ -1,0 +1,241 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- 可选的Bootstrap主题文件（一般不用引入）
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+     -->
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 
+    <link rel='stylesheet' type='text/css' href='css/imgareaselect-default.css'>
+    -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 
+    <script src="js/bootstrap.min.js"></script>
+    -->
+
+    <link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  
+    <!-- <script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script> -->
+    <script src="js/highlight.min.js"></script>
+    <script >hljs.initHighlightingOnLoad();</script>  
+
+
+    <script type="text/javascript" src="js/jquery.imgareaselect.pack.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    
+
+    <style type="text/css">
+      .CodeMirror-line-numbers {
+        width: 2.2em  !important;
+        color: #aaa !important;
+        background-color: #eee !important;
+        text-align: right !important;
+        padding: .4em !important;
+        margin: 0 !important;
+        font-family: monospace !important;
+        font-size: 10pt !important;
+        line-height: 1.1em !important;
+      }
+
+      #editor{
+        min-height: 400px; 
+        max-height: 500px;
+        _height: 120px; 
+        margin-left: auto; 
+        margin-right: auto; 
+        padding: 3px; 
+        font-size: 14px; 
+        word-wrap: break-word;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+    </style>
+
+<title>Script_Writing_Frame</title>
+
+</head>
+<body style='overflow:-Scroll;overflow-x:hidden'>
+<div class ="container-fluid">
+    <div class = "row">
+            <div class="dropdown" style="float:left;margin:5px">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                    文件
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">新建</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">打开</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">另存为</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown" style="float:left;margin:5px">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                    运行
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                </ul>
+            </div>
+
+            <div class="dropdown" style="float:left;margin:5px">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                    使用说明
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">使用指南</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">使用教程</a></li>
+                </ul>
+            </div>
+
+            
+    </div>
+    <!--插入图片，截图-->
+    <div class = "row placeholders">
+        <div class = "col-xs-6 col-sm-1 col-md-offset-4 placeholders" >
+            <a href="#" class="thumbnail">
+            <img src="img/camera-icon.png" title="截图">
+            </a>
+            <!--
+            <span class="text-muted">屏幕截图</span>-->
+        </div>
+        <div class = "col-xs-6 col-sm-1 placeholder">
+            <a href="#" class="thumbnail">
+            <img src="img/insert-image-icon.png" id = "insert_img" title="插入图片">
+            </a>
+            <input type="file" id="picpath" style="display:none;" accept="image/*" />
+            <input type='text' id="path" readonly style="display:none;"/>
+            <!--
+            <span class="text-muted">插入图片</span>
+            
+            -->
+
+        </div>
+        <div class = "col-xs-6 col-sm-1  placeholders" id ="dl_file" onclick = "downloadScript()">
+            <a href="#" class="thumbnail">
+            <img src="img/file.png" title="下载脚步">
+            </a>
+            <!--
+            <span class="text-muted">屏幕截图</span>-->
+        </div>
+
+        <div class = "col-xs-6 col-sm-1 col-md-offset-1 placeholder">
+            <a href="#" class="thumbnail">
+            <img name="uploadImg" src="img/run_big_yl.png" alt="40*40">
+            </a>
+            <!--
+            <span class="text-muted">运行</span>-->
+            
+        </div>
+    </div>
+  
+    <div class = "row">
+        <!-- left page-->
+        <div class = "col-sm-3 col-md-2 sidebar">
+            <div class="panel panel-primary row" style="margin-left:2px">
+                <div class="panel-heading">
+                    <ul class = "nav nav-sidebar">设置</ul>
+                </div>
+                <div class="panel-body">
+                    <ul class = "nav nav-sidebar"><a href="#">自动截获</a></ul>
+                </div>
+            </div>
+            <div class="panel panel-primary row" style="margin-left:2px">
+                <div class="panel-heading">
+                    <ul class = "nav nav-sidebar">查找</ul>
+                </div>
+                <div class="panel-body">
+                    <ul class = "nav nav-sidebar"><a href="#">find()</a></a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">findAll()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">wait()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">waitVanish()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">exists()</a></ul>
+                </div>
+            </div>
+            
+            <div class="panel panel-primary row" style="margin-left:2px">
+                <div class="panel-heading">
+                    <ul class = "nav nav-sidebar">鼠标动作</ul>
+                </div>
+                <div class="panel-body">
+                    <ul class = "nav nav-sidebar"><a href="#">click()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">doubleClick()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">wait()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">waitVanish()</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">exists()</a></ul>
+                </div>
+            </div>
+
+            <div class="panel panel-primary row" style="margin-left:2px">
+                <div class="panel-heading">
+                    <ul class = "nav nav-sidebar">键盘动作</ul>
+                </div>
+                <div class="panel-body">
+                    <ul class = "nav nav-sidebar"><a href="#">type(text)</a></ul>
+                    <ul class = "nav nav-sidebar"><a href="#">paste(text)</a></ul>
+                </div>
+            </div>
+           
+
+        </div>
+
+        <!-- main page-->
+        <div class = "row col-sm-8 col-md-9" style="margin-left:5px">
+
+            <div id = "editor" style="height:450px;border:1px solid #428bca;" contenteditable="true"><pre id = "code_pre" style="font-size:15px"><code class ="python">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</code></pre >
+            </div>
+            <div style="height:250px;border:1px solid #428bca;border-top:0px solid #428bca;">
+                <div>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a  href="#">
+                                提示信息 <span class="caret"></span>
+                            </a>
+
+                        </li>
+                    </ul>
+               </div>
+               <div id ="opInfo" style="height:207px;" contenteditable="true">abc</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--
+<script type="text/javascript">
+    var editor = CodeMirror.fromTextArea('editor', {
+        parserfile: ["parsepython.js"],
+        stylesheet: "CodeMirror/css/pythoncolors.css",
+        path: "CodeMirror/js/",
+        lineNumbers: true,
+        textWrapping: false,
+        indentUnit: 4,
+        parserConfig: {'pythonVersion': 2, 'strictErrors': true}
+    });
+-->
+</body>
+</html>
